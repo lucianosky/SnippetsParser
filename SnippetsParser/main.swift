@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  swiftparser
+//  SnippetsParser
 //
 //  Created by Luciano Sclovsky on 12/06/18.
 //  Copyright © 2018 Skyffee. All rights reserved.

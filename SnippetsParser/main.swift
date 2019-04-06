@@ -15,15 +15,14 @@ func strategy(url: URL, saveUrl: URL) {
     print("Found \(count) swift file\(count != 1 ? "s" : "")")
     swiftFiles.forEach { (url) in
         if let lines = FileHelper.getFileLines(url: url) {
-            print("Parsing file \(url.absoluteString)")
+            print("Parsing file \(url.lastPathComponent)")
             let snippets = Snippet.linesToSnippets(lines: lines)
             let count2 = snippets.count
             print("Found \(count2) snippet\(count2 != 1 ? "s" : "")")
             snippets.forEach({ (snippet) in
                 snippet.printSnippet()
                 let plist = snippet.toPlist()
-                let fileUrl = saveUrl.appendingPathComponent("snippet_\(snippet.id).codesnippet")
-                print(fileUrl)
+                let fileUrl = saveUrl.appendingPathComponent("snippet_\(snippet.idZeros).codesnippet")
                 do {
                     try plist.write(to: fileUrl, atomically: true, encoding: String.Encoding.utf8)
                 } catch {

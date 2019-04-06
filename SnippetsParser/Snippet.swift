@@ -13,19 +13,24 @@ struct Snippet {
     let title: String
     let links: [String]
     let code: [String]
+    
+    var idZeros: String {
+        return String(format: "%04d", id)
+    }
 
-    func printSnippet() {
-        print(id)
-        print(title)
-        print("-links-")
-        links.forEach { (link) in
-            print(link)
+    func printSnippet(_ withCodeAndLinks: Bool = false) {
+        print("#\(idZeros) \(title)")
+        if withCodeAndLinks {
+            print("")
+            code.forEach { (codeLine) in
+                print(codeLine)
+            }
+            print("")
+            links.forEach { (link) in
+                print(link)
+            }
+            print("")
         }
-        print("-code-")
-        code.forEach { (codeLine) in
-            print(codeLine)
-        }
-        print("------")
     }
     
     func toPlist() -> String {

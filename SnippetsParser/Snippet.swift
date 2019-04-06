@@ -18,7 +18,7 @@ struct Snippet {
         return String(format: "%04d", id)
     }
 
-    func printSnippet(_ withCodeAndLinks: Bool = false) {
+    func printSnippet(_ withCodeAndLinks: Bool = true) {
         print("#\(idZeros) \(title)")
         if withCodeAndLinks {
             print("")

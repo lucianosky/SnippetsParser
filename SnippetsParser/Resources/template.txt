@@ -8,7 +8,7 @@
 	</array>
 	<key>IDECodeSnippetContents</key>
 	<string>@code
-}</string>
+</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>FBA7DF2E-EC0B-4563-9B3B-720B1AC819C1</string>
 	<key>IDECodeSnippetLanguage</key>

@@ -19,7 +19,7 @@ func strategy(url: URL, saveUrl: URL) {
             let snippets = Snippet.linesToSnippets(lines: lines)
             let count2 = snippets.count
             print("Found \(count2) snippet\(count2 != 1 ? "s" : "")")
-            snippets.forEach({ (snippet) in
+            snippets.sorted(by: { $0.id < $1.id }).forEach({ (snippet) in
                 snippet.printSnippet()
                 let plist = snippet.toPlist()
                 let fileUrl = saveUrl.appendingPathComponent("snippet_\(snippet.idZeros).codesnippet")

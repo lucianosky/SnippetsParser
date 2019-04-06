@@ -21,11 +21,11 @@ struct Snippet {
     func printSnippet(_ withCodeAndLinks: Bool = true) {
         print("#\(idZeros) \(title)")
         if withCodeAndLinks {
-            print("")
+            print("Code:")
             code.forEach { (codeLine) in
                 print(codeLine)
             }
-            print("")
+            print("Links:")
             links.forEach { (link) in
                 print(link)
             }
@@ -45,25 +45,22 @@ struct Snippet {
             .replacingOccurrences(of: "@code", with: code)
         return plist
     }
-    
+        
     static func linesToSnippets(lines: [String]) -> [Snippet] {
         var snippets = [Snippet]()
         var i = 0
         while i < lines.count {
-            if lines[i] == "snippet = [" {
-                i += 1
-                let id = lines[i].getInt()
-                i += 1
-                let title = lines[i].getString()
+            let line = lines[i]
+            if line.hasPrefix("_ = Snippet( ") {
+                let index = line.index(line.startIndex, offsetBy: 13)
+                let substring = line[index...]
+                let array = substring.components(separatedBy: ",").map{$0.trimmingCharacters(in: .whitespacesAndNewlines).dropQuotationMarks()}
+                let id = Int(array[0])!
+                let title = array[1]
                 i += 1
                 var links = [String]()
-                if lines[i] == "\"links\": [" {
-                    i += 1
-                    while lines[i] != "]" {
-                        let line = lines[i].getString()
-                        links.append(line)
-                        i += 1
-                    }
+                while lines[i] != "])" {
+                    links.append(lines[i].dropQuotationMarks())
                     i += 1
                 }
                 i += 1
@@ -80,6 +77,7 @@ struct Snippet {
         }
         return snippets
     }
+
     
 }
 

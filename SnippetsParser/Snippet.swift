@@ -45,7 +45,7 @@ struct Snippet {
             .replacingOccurrences(of: "@code", with: code)
         return plist
     }
-        
+    
     static func linesToSnippets(lines: [String]) -> [Snippet] {
         var snippets = [Snippet]()
         var i = 0
@@ -66,7 +66,9 @@ struct Snippet {
                 i += 1
                 var code = [String]()
                 while lines[i].count > 0 {
-                    code.append(lines[i])
+                    if lines[i] != "*/" {
+                        code.append(lines[i])
+                    }
                     i += 1
                 }
                 let snippet = Snippet(id: id, title: title, links: links, code: code)

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4E05FB3420D045C200FDB6F9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E05FB3320D045C200FDB6F9 /* main.swift */; };
-		6701C83685857EF74C590917 /* Pods_SnippetsParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B041946ADC1179A668B6699 /* Pods_SnippetsParser.framework */; };
 		6EFE599D21A1F98600E5EA6E /* MacOSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE599C21A1F98600E5EA6E /* MacOSHelper.swift */; };
 		6EFE599F21A206F500E5EA6E /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE599E21A206F500E5EA6E /* FileHelper.swift */; };
 		6EFE59A921A22D0300E5EA6E /* template.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E7116ED20D6A4D5008BCDD9 /* template.txt */; };
@@ -30,17 +29,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B041946ADC1179A668B6699 /* Pods_SnippetsParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnippetsParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4130D5851BC4D48FCBD43B5C /* Pods-SnippetsParser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnippetsParser.release.xcconfig"; path = "Target Support Files/Pods-SnippetsParser/Pods-SnippetsParser.release.xcconfig"; sourceTree = "<group>"; };
 		4E05FB3020D045C200FDB6F9 /* SnippetsParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SnippetsParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E05FB3320D045C200FDB6F9 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6E4949932295AC6D001612AF /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E4949952295AEB4001612AF /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7116ED20D6A4D5008BCDD9 /* template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = template.txt; sourceTree = "<group>"; };
 		6E7116EE20D6A540008BCDD9 /* snippet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = snippet.plist; sourceTree = "<group>"; };
 		6EFE599C21A1F98600E5EA6E /* MacOSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSHelper.swift; sourceTree = "<group>"; };
 		6EFE599E21A206F500E5EA6E /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		6EFE59AA21A2325B00E5EA6E /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		6EFE59AC21A234FB00E5EA6E /* Snippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippet.swift; sourceTree = "<group>"; };
-		B72AFDF349AD8E5A40DF3069 /* Pods-SnippetsParser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnippetsParser.debug.xcconfig"; path = "Target Support Files/Pods-SnippetsParser/Pods-SnippetsParser.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,17 +46,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6701C83685857EF74C590917 /* Pods_SnippetsParser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F93B2C5CDCE84C88227806F /* Frameworks */ = {
+		36F7EE0E1CE15D249E8052E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0B041946ADC1179A668B6699 /* Pods_SnippetsParser.framework */,
+				6E4949952295AEB4001612AF /* Alamofire.framework */,
+				6E4949932295AC6D001612AF /* Alamofire.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -69,7 +67,7 @@
 				4E05FB3220D045C200FDB6F9 /* SnippetsParser */,
 				4E05FB3120D045C200FDB6F9 /* Products */,
 				CB5849F03B5C94ADE489EA5D /* Pods */,
-				2F93B2C5CDCE84C88227806F /* Frameworks */,
+				36F7EE0E1CE15D249E8052E4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,10 +104,7 @@
 		CB5849F03B5C94ADE489EA5D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B72AFDF349AD8E5A40DF3069 /* Pods-SnippetsParser.debug.xcconfig */,
-				4130D5851BC4D48FCBD43B5C /* Pods-SnippetsParser.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -120,7 +115,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4E05FB3720D045C200FDB6F9 /* Build configuration list for PBXNativeTarget "SnippetsParser" */;
 			buildPhases = (
-				82FA6283A8428F84BEBF84C7 /* [CP] Check Pods Manifest.lock */,
 				4E05FB2C20D045C200FDB6F9 /* Sources */,
 				4E05FB2D20D045C200FDB6F9 /* Frameworks */,
 				6EFE59A821A22CF900E5EA6E /* CopyFiles */,
@@ -167,31 +161,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		82FA6283A8428F84BEBF84C7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SnippetsParser-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4E05FB2C20D045C200FDB6F9 /* Sources */ = {
@@ -263,6 +232,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -312,12 +282,12 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
 		4E05FB3820D045C200FDB6F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B72AFDF349AD8E5A40DF3069 /* Pods-SnippetsParser.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -327,7 +297,6 @@
 		};
 		4E05FB3920D045C200FDB6F9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4130D5851BC4D48FCBD43B5C /* Pods-SnippetsParser.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";

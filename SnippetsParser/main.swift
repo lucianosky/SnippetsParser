@@ -33,13 +33,58 @@ func strategy(url: URL, saveUrl: URL) {
     }
 }
 
+func downloadFromGithub() -> Bool {
+    print("Will download from github")
+    guard let githubURL = URL(string: "https://github.com/lucianosky/1000snippets/archive/master.zip"),
+          let documentsUrl = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    else {
+        return false
+    }
+    let destination = documentsUrl.appendingPathComponent("1000snippets.zip")
+
+    if FileManager.default.fileExists(atPath: destination.path) {
+        do {
+            try FileManager.default.removeItem(atPath: destination.path)
+            print("Deleted previous version of 1000snippets")
+        }
+        catch let error as NSError {
+            print("Could not delete previous version of 1000snippets: \(error)")
+            return false
+        }
+    }
+        
+    let semaphore = DispatchSemaphore(value: 0)
+    URLSession.shared.downloadTask(with: githubURL, completionHandler: { (location, response, error) in
+        // after downloading your data you need to save it to your destination url
+        guard
+            let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+            let mimeType = response?.mimeType, mimeType.hasPrefix("application/zip"),
+            let location = location, error == nil
+            else { return }
+        do {
+            try FileManager.default.moveItem(at: location, to: destination)
+        } catch {
+            print("Could not save file: \(error)")
+        }
+        print("done!")
+        semaphore.signal()
+    }).resume()
+    print("downloading file...")
+    semaphore.wait()
+    return true
+}
+
 print("Swift Parser")
 if CommandLine.argc < 3 {
     print("usage: SwiftParser <pathToProject> <pathToSnippets>")
     exit(1)
 }
 
+_ = downloadFromGithub()
+print("continuando...")
+
 let url = URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: true)
 let saveUrl = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
 strategy(url: url, saveUrl: saveUrl)
 
+print("finished...")

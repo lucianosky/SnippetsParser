@@ -20,7 +20,7 @@ func strategy(sourceUrl: URL, saveUrl: URL) {
             let count2 = snippets.count
             print("Found \(count2) snippet\(count2 != 1 ? "s" : "")")
             snippets.sorted(by: { $0.id < $1.id }).forEach({ (snippet) in
-                snippet.printSnippet()
+                snippet.printSnippet(false)
                 let plist = snippet.toPlist()
                 let fileUrl = saveUrl.appendingPathComponent("snippet_\(snippet.idZeros).codesnippet")
                 do {
@@ -60,9 +60,8 @@ func deleteFileIfExists(path: String) -> Bool {
     return true
 }
 
-func documentsUrl() -> URL? {
-    //print(try! FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: true))
-    return  try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+func getFolderUrl(for directory: FileManager.SearchPathDirectory) -> URL? {
+    return try? FileManager.default.url(for: directory, in: .userDomainMask, appropriateFor: nil, create: true)
 }
 
 func gitClone(_ gitSource: String, _ targetFolder: String) -> Bool {
@@ -83,23 +82,34 @@ func gitClone(_ gitSource: String, _ targetFolder: String) -> Bool {
     return true
 }
 
+
 print("Swift Parser")
-if CommandLine.argc < 3 {
-    print("usage: SwiftParser <pathToProject> <pathToSnippets>")
+if CommandLine.argc > 1 {
+    print("Warning: SwiftParser takes no arguments")
+}
+
+guard let docUrl = getFolderUrl(for: .documentDirectory),
+      let libUrl = getFolderUrl(for: .libraryDirectory) else {
+    print("Error fetching folders")
     exit(1)
 }
 
-guard let docsUrl = documentsUrl() else {
-    print("Error fetching documents URL")
-    exit(1)
-}
+print(docUrl)
+let targetUrl = docUrl.appendingPathComponent("1000SnippetsAppCode")
+print(targetUrl, FileManager.default.fileExists(atPath: targetUrl.path))
+
+print(libUrl)
+
+let userDataUrl = libUrl.appendingPathComponent("Developer/Xcode/UserData")
+print(userDataUrl, FileManager.default.fileExists(atPath: userDataUrl.path))
+
+let codeSnippetsUrl = userDataUrl.appendingPathComponent("CodeSnippets")
+print(codeSnippetsUrl, FileManager.default.fileExists(atPath: codeSnippetsUrl.path))
+
 let gitSource = "https://github.com/lucianosky/1000Snippets.git"
-let targetFolder = docsUrl.path + "/1000SnippetsAppCode"
-_ = gitClone(gitSource, targetFolder)
 
-let sourceUrl = URL(fileURLWithPath: targetFolder, isDirectory: true)
-//let sourceUrl = URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: true)
-let saveUrl = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: true)
-strategy(sourceUrl: sourceUrl, saveUrl: saveUrl)
+_ = gitClone(gitSource, targetUrl.path)
+
+strategy(sourceUrl: targetUrl, saveUrl: codeSnippetsUrl)
 
 print("finished...")

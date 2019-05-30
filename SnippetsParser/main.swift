@@ -15,12 +15,11 @@ func strategy(sourceUrl: URL, saveUrl: URL) {
     print("Found \(count) swift file\(count != 1 ? "s" : "")")
     swiftFiles.forEach { (url) in
         if let lines = FileHelper.getFileLines(url: url) {
-            print("Parsing file \(url.lastPathComponent)")
             let snippets = Snippet.linesToSnippets(lines: lines)
             let count2 = snippets.count
-            print("Found \(count2) snippet\(count2 != 1 ? "s" : "")")
+            print("\(count2) snippet\(count2 != 1 ? "s" : "") at \(url.lastPathComponent)")
             snippets.sorted(by: { $0.id < $1.id }).forEach({ (snippet) in
-                snippet.printSnippet(false)
+                // snippet.printSnippet(false)
                 let plist = snippet.toPlist()
                 let fileUrl = saveUrl.appendingPathComponent("snippet_\(snippet.idZeros).codesnippet")
                 do {
@@ -47,13 +46,19 @@ extension Process {
 
 func deleteFileIfExists(path: String) -> Bool {
     if FileManager.default.fileExists(atPath: path) {
-        print("file exists")
+        print("Found previous git clone version of app at \(path).")
+        print("Confirm delete? (y)")
+        let response = readLine()
+        guard let r = response, r.uppercased() == "Y" else {
+            print("Script aborted by user.")
+            return false
+        }
         do {
             try FileManager.default.removeItem(atPath: path)
-            print("Deleted previous version of 1000snippets")
+            print("Deleted previous folder.")
         }
         catch let error as NSError {
-            print("Could not delete previous version of 1000snippets: \(error)")
+            print("Could not delete previous folder: \(error.localizedDescription)")
             return false
         }
     }
@@ -65,51 +70,47 @@ func getFolderUrl(for directory: FileManager.SearchPathDirectory) -> URL? {
 }
 
 func gitClone(_ gitSource: String, _ targetFolder: String) -> Bool {
-    guard deleteFileIfExists(path: targetFolder) else {
-        print("error deleting folder")
-        return false
-    }
-    print("Will clone repo")
+    print("Cloning repo: \(gitSource)")
     let p = Process()
     do {
         try p.clone(repo: gitSource, path: targetFolder)
         p.waitUntilExit()
     } catch {
-        print("Error cloning repo")
+        print("Error cloning repo.")
         return false
     }
-    print("Done")
+    print("Repo cloned.")
     return true
 }
 
-
-print("Swift Parser")
+print("Thank you very much for using this early version of SnippetsParser! :)")
 if CommandLine.argc > 1 {
     print("Warning: SwiftParser takes no arguments")
 }
 
 guard let docUrl = getFolderUrl(for: .documentDirectory),
       let libUrl = getFolderUrl(for: .libraryDirectory) else {
-    print("Error fetching folders")
+    print("An error happened reading document or library folders")
     exit(1)
 }
 
-print(docUrl)
-let targetUrl = docUrl.appendingPathComponent("1000SnippetsAppCode")
-print(targetUrl, FileManager.default.fileExists(atPath: targetUrl.path))
-
-print(libUrl)
-
 let userDataUrl = libUrl.appendingPathComponent("Developer/Xcode/UserData")
-print(userDataUrl, FileManager.default.fileExists(atPath: userDataUrl.path))
+if !FileManager.default.fileExists(atPath: userDataUrl.path) {
+    print("Error: could not find expected UserData folder at: \(userDataUrl.path)")
+    exit(1)
+}
+
+let targetUrl = docUrl.appendingPathComponent("1000Snippets")
+guard deleteFileIfExists(path: targetUrl.path) else {
+    exit(1)
+}
 
 let codeSnippetsUrl = userDataUrl.appendingPathComponent("CodeSnippets")
 print(codeSnippetsUrl, FileManager.default.fileExists(atPath: codeSnippetsUrl.path))
 
 let gitSource = "https://github.com/lucianosky/1000Snippets.git"
-
 _ = gitClone(gitSource, targetUrl.path)
 
 strategy(sourceUrl: targetUrl, saveUrl: codeSnippetsUrl)
 
-print("finished...")
+print("Successfully installed snippets for Xcode.")

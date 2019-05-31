@@ -47,15 +47,17 @@ func installation() -> Bool {
     
     Snippet.searchForSnippets(sourceUrl: targetUrl, saveUrl: codeSnippetsUrl)
     print("Successfully installed snippets for Xcode.")
-    return true
-}
 
-let apps = NSWorkspace.shared.runningApplications.filter { (app) -> Bool in
-    // user apps: app.activationPolicy == .regular
-    return app.localizedName == "Xcode"
-}
-if apps.count == 1 {
-    print("Xcode is running")
+
+    let nunningApps = NSWorkspace.shared.runningApplications.filter { (app) -> Bool in
+        // filter for user apps: app.activationPolicy == .regular
+        return app.localizedName == "Xcode"
+    }
+    if nunningApps.count >= 1 {
+        print("Xcode is running, please restart it to install snippets.")
+    }
+
+    return true
 }
 
 if installation() {

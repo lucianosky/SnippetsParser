@@ -6,8 +6,6 @@
 //  Copyright © 2018 Skyffee. All rights reserved.
 //
 
-import Foundation
-
 extension String {
 
     func dropLastComma() -> String {

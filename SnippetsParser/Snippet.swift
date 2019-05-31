@@ -17,6 +17,31 @@ struct Snippet {
     var idZeros: String {
         return String(format: "%04d", id)
     }
+    
+    static let macOSHelper = MacOSHelper()
+    
+    static func searchForSnippets(sourceUrl: URL, saveUrl: URL) {
+        let swiftFiles = macOSHelper.recursiveFindSwiftFiles(folder: sourceUrl, swiftFiles: [URL]() )
+        let filesCount = swiftFiles.count
+        print("Found \(filesCount) swift file\(filesCount != 1 ? "s" : "")")
+        swiftFiles.forEach { (url) in
+            if let lines = macOSHelper.getFileLines(url: url) {
+                let snippets = Snippet.linesToSnippets(lines: lines)
+                let snippetsInFileCount = snippets.count
+                print("\(snippetsInFileCount) snippet\(snippetsInFileCount != 1 ? "s" : "") at \(url.lastPathComponent)")
+                snippets.sorted(by: { $0.id < $1.id }).forEach({ (snippet) in
+                    // snippet.printSnippet(false)
+                    let plist = snippet.toPlist()
+                    let fileUrl = saveUrl.appendingPathComponent("snippet_\(snippet.idZeros).codesnippet")
+                    do {
+                        try plist.write(to: fileUrl, atomically: true, encoding: String.Encoding.utf8)
+                    } catch {
+                        print("error")
+                    }
+                })
+            }
+        }
+    }
 
     func printSnippet(_ withCodeAndLinks: Bool = true) {
         print("#\(idZeros) \(title)")
@@ -36,7 +61,7 @@ struct Snippet {
     func toPlist() -> String {
         let resource = "template"
         let type = "txt"
-        guard let template = FileHelper.getResourceText(forResource: resource, ofType: type) else {
+        guard let template = Snippet.macOSHelper.getResourceText(forResource: resource, ofType: type) else {
             return ""
         }
         let code = self.code.joined(separator: "\n")

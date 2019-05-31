@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4E05FB3420D045C200FDB6F9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E05FB3320D045C200FDB6F9 /* main.swift */; };
+		6EDCE04622A1828000D236CD /* ProcessExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDCE04522A1828000D236CD /* ProcessExtension.swift */; };
 		6EFE599D21A1F98600E5EA6E /* MacOSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE599C21A1F98600E5EA6E /* MacOSHelper.swift */; };
-		6EFE599F21A206F500E5EA6E /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE599E21A206F500E5EA6E /* FileHelper.swift */; };
 		6EFE59A921A22D0300E5EA6E /* template.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E7116ED20D6A4D5008BCDD9 /* template.txt */; };
 		6EFE59AB21A2325B00E5EA6E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE59AA21A2325B00E5EA6E /* StringExtension.swift */; };
 		6EFE59AD21A234FB00E5EA6E /* Snippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE59AC21A234FB00E5EA6E /* Snippet.swift */; };
@@ -35,8 +35,8 @@
 		6E4949952295AEB4001612AF /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7116ED20D6A4D5008BCDD9 /* template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = template.txt; sourceTree = "<group>"; };
 		6E7116EE20D6A540008BCDD9 /* snippet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = snippet.plist; sourceTree = "<group>"; };
+		6EDCE04522A1828000D236CD /* ProcessExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessExtension.swift; sourceTree = "<group>"; };
 		6EFE599C21A1F98600E5EA6E /* MacOSHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSHelper.swift; sourceTree = "<group>"; };
-		6EFE599E21A206F500E5EA6E /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		6EFE59AA21A2325B00E5EA6E /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		6EFE59AC21A234FB00E5EA6E /* Snippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snippet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,10 +84,10 @@
 			children = (
 				6E7116EE20D6A540008BCDD9 /* snippet.plist */,
 				4E05FB3320D045C200FDB6F9 /* main.swift */,
-				6EFE599E21A206F500E5EA6E /* FileHelper.swift */,
-				6EFE599C21A1F98600E5EA6E /* MacOSHelper.swift */,
-				6EFE59AA21A2325B00E5EA6E /* StringExtension.swift */,
 				6EFE59AC21A234FB00E5EA6E /* Snippet.swift */,
+				6EFE599C21A1F98600E5EA6E /* MacOSHelper.swift */,
+				6EDCE04522A1828000D236CD /* ProcessExtension.swift */,
+				6EFE59AA21A2325B00E5EA6E /* StringExtension.swift */,
 				6EFE59A521A2263400E5EA6E /* Resources */,
 			);
 			path = SnippetsParser;
@@ -167,11 +167,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EDCE04622A1828000D236CD /* ProcessExtension.swift in Sources */,
 				6EFE59AB21A2325B00E5EA6E /* StringExtension.swift in Sources */,
 				4E05FB3420D045C200FDB6F9 /* main.swift in Sources */,
 				6EFE59AD21A234FB00E5EA6E /* Snippet.swift in Sources */,
 				6EFE599D21A1F98600E5EA6E /* MacOSHelper.swift in Sources */,
-				6EFE599F21A206F500E5EA6E /* FileHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

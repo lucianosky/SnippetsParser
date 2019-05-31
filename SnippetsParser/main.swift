@@ -8,20 +8,6 @@
 
 import Foundation
 
-func gitClone(_ gitSource: String, _ targetFolder: String) -> Bool {
-    print("Cloning repo: \(gitSource)")
-    let p = Process()
-    do {
-        try p.clone(repo: gitSource, path: targetFolder)
-        p.waitUntilExit()
-    } catch {
-        print("Error cloning repo.")
-        return false
-    }
-    print("Repo cloned.")
-    return true
-}
-
 func installation() -> Bool {
     let macOSHelper = MacOSHelper()
     
@@ -37,13 +23,13 @@ func installation() -> Bool {
     }
     
     let userDataUrl = libUrl.appendingPathComponent("Developer/Xcode/UserData")
-    if !macOSHelper.fileExists(atPath: userDataUrl.path) {
+    guard macOSHelper.fileExists(atPath: userDataUrl.path) else {
         print("Error: could not find expected UserData folder at: \(userDataUrl.path)")
         return false
     }
     
     let codeSnippetsUrl = userDataUrl.appendingPathComponent("CodeSnippets")
-    if !macOSHelper.createFolderIfNotExists(path: codeSnippetsUrl.path) {
+    guard macOSHelper.createFolderIfNotExists(path: codeSnippetsUrl.path) else {
         return false
     }
     
@@ -53,7 +39,8 @@ func installation() -> Bool {
     }
     
     let gitSource = "https://github.com/lucianosky/1000Snippets.git"
-    if !gitClone(gitSource, targetUrl.path) {
+    let process = Process()
+    guard process.gitClone(gitSource, targetUrl.path) else {
         return false
     }
     

@@ -18,5 +18,18 @@ extension Process {
         try run()
     }
     
+    func gitClone(_ gitSource: String, _ targetFolder: String) -> Bool {
+        print("Cloning repo: \(gitSource)")
+        do {
+            try clone(repo: gitSource, path: targetFolder)
+            waitUntilExit()
+        } catch {
+            print("Error cloning repo.")
+            return false
+        }
+        print("Repo cloned.")
+        return true
+    }
+    
 }
 

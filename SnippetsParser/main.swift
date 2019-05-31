@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AppKit
 
 func installation() -> Bool {
     let macOSHelper = MacOSHelper()
@@ -47,6 +48,14 @@ func installation() -> Bool {
     Snippet.searchForSnippets(sourceUrl: targetUrl, saveUrl: codeSnippetsUrl)
     print("Successfully installed snippets for Xcode.")
     return true
+}
+
+let apps = NSWorkspace.shared.runningApplications.filter { (app) -> Bool in
+    // user apps: app.activationPolicy == .regular
+    return app.localizedName == "Xcode"
+}
+if apps.count == 1 {
+    print("Xcode is running")
 }
 
 if installation() {

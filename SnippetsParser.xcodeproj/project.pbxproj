@@ -31,6 +31,7 @@
 /* Begin PBXFileReference section */
 		4E05FB3020D045C200FDB6F9 /* SnippetsParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SnippetsParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E05FB3320D045C200FDB6F9 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6E130FBC22A194B000E7014B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6E4949932295AC6D001612AF /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E4949952295AEB4001612AF /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7116ED20D6A4D5008BCDD9 /* template.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = template.txt; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		4E05FB2720D045C200FDB6F9 = {
 			isa = PBXGroup;
 			children = (
+				6E130FBC22A194B000E7014B /* README.md */,
 				4E05FB3220D045C200FDB6F9 /* SnippetsParser */,
 				4E05FB3120D045C200FDB6F9 /* Products */,
 				CB5849F03B5C94ADE489EA5D /* Pods */,

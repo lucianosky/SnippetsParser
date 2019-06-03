@@ -35,7 +35,10 @@ func installation() -> Bool {
     }
     
     let targetUrl = docUrl.appendingPathComponent("1000Snippets")
-    guard macOSHelper.deleteFolderIfExists(path: targetUrl.path, description: "github clone") else {
+    let msg = "Found previous github clone folder of app at \(targetUrl.path).\nConfirm delete? (y)"
+
+    guard macOSHelper.deleteFolderIfExists(path: targetUrl.path, confirmationMessage: msg) else {
+        print("Operation aborted by user.")
         return false
     }
     
@@ -48,6 +51,7 @@ func installation() -> Bool {
     Snippet.searchForSnippets(sourceUrl: targetUrl, saveUrl: codeSnippetsUrl)
     print("Successfully installed snippets for Xcode.")
 
+    _ = macOSHelper.deleteFolderIfExists(path: targetUrl.path, confirmationMessage: "Remove 1000Snippets git clone version? (y)")
 
     let nunningApps = NSWorkspace.shared.runningApplications.filter { (app) -> Bool in
         // filter for user apps: app.activationPolicy == .regular

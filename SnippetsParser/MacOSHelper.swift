@@ -18,18 +18,16 @@ class MacOSHelper {
         return FileManager.default.fileExists(atPath: path)
     }
     
-    func deleteFolderIfExists(path: String, description: String) -> Bool {
+    func deleteFolderIfExists(path: String, confirmationMessage: String) -> Bool {
         if FileManager.default.fileExists(atPath: path) {
-            print("Found previous \(description) folder of app at \(path).")
-            print("Confirm delete? (y)")
+            print(confirmationMessage)
             let response = readLine()
             guard let r = response, r.uppercased() == "Y" else {
-                print("Operation aborted by user.")
                 return false
             }
             do {
                 try FileManager.default.removeItem(atPath: path)
-                print("Deleted previous folder.")
+                print("Deleted folder: \(path)")
             }
             catch let error as NSError {
                 print("Could not delete previous folder: \(error.localizedDescription)")

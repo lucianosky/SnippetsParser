@@ -6,6 +6,15 @@
 //  Copyright © 2018 Skyffee. All rights reserved.
 //
 
+extension Int {
+    
+    func pluralString() -> String {
+        // 0 receives plural also
+        return self != 1 ? "s" : ""
+    }
+    
+}
+
 extension String {
 
     func dropLastComma() -> String {

@@ -23,13 +23,14 @@ struct Snippet {
     static func searchForSnippets(sourceUrl: URL, saveUrl: URL) {
         let swiftFiles = macOSHelper.recursiveFindSwiftFiles(folder: sourceUrl, swiftFiles: [URL]() )
         let filesCount = swiftFiles.count
-        print("Found \(filesCount) swift file\(filesCount != 1 ? "s" : "")")
+        print("Found \(filesCount) swift file\(filesCount.pluralString())")
         swiftFiles.forEach { (url) in
             if let lines = macOSHelper.getFileLines(url: url) {
                 let snippets = Snippet.linesToSnippets(lines: lines)
                 let snippetsInFileCount = snippets.count
-                print("\(snippetsInFileCount) snippet\(snippetsInFileCount != 1 ? "s" : "") at \(url.lastPathComponent)")
+                print("\(snippetsInFileCount) snippet\(snippetsInFileCount.pluralString()) at \(url.lastPathComponent)")
                 snippets.sorted(by: { $0.id < $1.id }).forEach({ (snippet) in
+                    // print snippets in console
                     // snippet.printSnippet(false)
                     let plist = snippet.toPlist()
                     let fileUrl = saveUrl.appendingPathComponent("snippet_\(snippet.idZeros).codesnippet")

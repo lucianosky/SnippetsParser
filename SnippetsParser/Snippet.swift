@@ -11,7 +11,6 @@ import Foundation
 struct Snippet {
     let id: Int
     let title: String
-    let links: [String]
     let code: [String]
     
     var idZeros: String {
@@ -51,10 +50,6 @@ struct Snippet {
             code.forEach { (codeLine) in
                 print(codeLine)
             }
-            print("Links:")
-            links.forEach { (link) in
-                print(link)
-            }
             print("")
         }
     }
@@ -84,12 +79,6 @@ struct Snippet {
                 let id = Int(array[0])!
                 let title = array[1]
                 i += 1
-                var links = [String]()
-                while lines[i] != "])" {
-                    links.append(lines[i].dropQuotationMarks())
-                    i += 1
-                }
-                i += 1
                 var code = [String]()
                 while lines[i].count > 0 {
                     if lines[i] != "*/" {
@@ -97,7 +86,7 @@ struct Snippet {
                     }
                     i += 1
                 }
-                let snippet = Snippet(id: id, title: title, links: links, code: code)
+                let snippet = Snippet(id: id, title: title, code: code)
                 snippets.append(snippet)
             } else {
                 i += 1
